@@ -1,6 +1,6 @@
-import { createAction } from "@ngrx/store";
-// action - дії які покликані для того аби працювати з store
+import { createAction, props } from "@ngrx/store";
 export const increment=createAction(
-    // [Counter] конвенція для називання action
-    '[Counter] increment'
+    '[Counter] increment',
+    // дозволяє добавляти якісь дані до action
+    props<{value: number}>()
 )

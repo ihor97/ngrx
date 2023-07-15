@@ -12,8 +12,8 @@ export class CounterControlsComponent {
   constructor(private store:Store) {}
 
   increment() {
-    // відправляємо action
-    this.store.dispatch(increment())
+    // так як ми добавили data треба тепер вказати значення тому ключу
+    this.store.dispatch(increment({value:1}))
   }
 
   decrement() {
