@@ -1,25 +1,23 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { StoreModule } from '@ngrx/store';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { CounterOutputComponent } from './counter-output/counter-output.component';
-import { CounterControlsComponent } from './counter-controls/counter-controls.component';
-import { counterReducer } from './store/counter.reducer';
-import { EffectsModule } from '@ngrx/effects';
-import { CounterEffects } from './store/counter.effects';
+import { HeaderComponent } from './header/header.component';
+import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CounterOutputComponent,
-    CounterControlsComponent,
+  declarations: [AppComponent, HeaderComponent],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    SharedModule,
+    CoreModule,
   ],
-  imports: [BrowserModule, StoreModule.forRoot({
-    counter: counterReducer,
-    // ефекти
-  }), EffectsModule.forRoot([CounterEffects])],
-  providers: [],
   bootstrap: [AppComponent],
+  // providers: [LoggingService]
 })
 export class AppModule {}
