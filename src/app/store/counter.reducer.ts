@@ -1,5 +1,6 @@
-import { createReducer, on } from '@ngrx/store';
-import { increment } from './counter.actions';
+import { Action, createReducer, on } from '@ngrx/store';
+import { CounterActions, INCREMENT, incrementAction } from './counter.actions';
+// import { increment } from './counter.actions';
 
 const initialState = 0;
 
@@ -9,11 +10,13 @@ const initialState = 0;
 //   on(increment, (state,action)=>state+action.value)
 // );
 
-
-export function counterReducer(state=initialState,action:any) {
+// counterReducer виконується для будь якої action яка відправляється
+export function counterReducer(state=initialState,action:CounterActions | Action) {
   // action.type це є ключ в actions
-  if(action.type==='[Counter] increment'){
-    return state+action.value
+  // ми добавили типи для того щоб менще було потім помилок
+  if(action.type===INCREMENT){
+    // тут ми кастуємо
+    return state+(action as incrementAction).value
   }
   return initialState
 }
