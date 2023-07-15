@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {  incrementAction } from '../store/counter.actions';
+import {  decrement, increment } from '../store/counter.actions';
 
 
 @Component({
@@ -13,12 +13,16 @@ export class CounterControlsComponent {
 
   increment() {
     // так як ми добавили data треба тепер вказати значення тому ключу
-    // this.store.dispatch(increment({value:1}))
+    this.store.dispatch(increment({value:1}))
    
     // альтернативний варіант 
-    this.store.dispatch(new incrementAction(2))
+    // this.store.dispatch(new incrementAction(1))
   }
 
   decrement() {
+    this.store.dispatch(decrement({value:-1}))
+
+    // this.store.dispatch(new decrementAction(-1))
+
   }
 }
