@@ -1,6 +1,13 @@
 import { Action, createAction, props } from "@ngrx/store";
 
+export const init=createAction(
+    '[Counter] init' 
+)
+export const set = createAction(
+    '[Counter] Set',
+    props<{value:number}>()
 
+)
 // increment() - є фунцкія яка вертає обєкт {type,value}
 export const increment=createAction(
     '[Counter] increment',

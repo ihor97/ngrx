@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import {  decrement, increment } from './counter.actions';
+import {  decrement, increment, set } from './counter.actions';
 // import { increment } from './counter.actions';
 
 const initialState = 0;
@@ -8,7 +8,8 @@ export const counterReducer = createReducer(
   initialState,
   // в action попадає наша data з функції props
   on(increment, (state,action)=>state+action.value),
-  on(decrement,(state,action)=>state+action.value))
+  on(decrement,(state,action)=>state+action.value),
+  on(set,(state,action)=>action.value))
 
 
 // counterReducer виконується для будь якої action яка відправляється
