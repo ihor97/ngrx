@@ -1,34 +1,24 @@
 import { Actions, createEffect, ofType} from "@ngrx/effects";
 import { decrement, increment } from "./counter.actions";
-import { tap } from "rxjs";
+import { tap, withLatestFrom } from "rxjs";
 import { Injectable } from "@angular/core";
-// export class CounterEffects{
-
-//     constructor(private actions$:Actions){}
-//     // actions$ емітить нам значення коли в аппці action відправляється
-//     saveCount=createEffect(()=> this.actions$.pipe(
-//         ofType(increment,decrement ),
-//         tap((action)=>{
-//             console.log(action);
-//             localStorage.setItem('count',action.value.toString())
-//         })
-//         // мусимо поставити false щоб вказує на те що не буде відправлятися новий action 
-//     ),{dispatch:false})
-// }
-
-
+import { Store } from "@ngrx/store";
 
 @Injectable()
 export class CounterEffects{
-    constructor(private actions$:Actions){}
+    constructor(private actions$:Actions, private store:Store<{counter:number}>){}
 // старий варіант
     // @Effect({dispatch:false})
     
     saveCount=createEffect(()=> this.actions$.pipe(
         ofType(increment,decrement ),
-        tap((action)=>{
+        // в цей оператор ми кладемо значення яке буде доступне в наступному операторі
+        withLatestFrom(this.store.select('counter'))
+        // як дату ми отримуємо масив з двох значень
+        // таким чином в counter приходить 
+        ,tap(([action,counter])=>{
             console.log(action);
-            localStorage.setItem('count',action.value.toString())
+            localStorage.setItem('count',counter.toString())
         })
     ),{dispatch:false})
 }
